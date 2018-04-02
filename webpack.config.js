@@ -3,8 +3,10 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './entry-server',
-  target: 'node',
+  entry: './entry-client',
+  
+  // entry: './entry-server',
+  // target: 'node',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
