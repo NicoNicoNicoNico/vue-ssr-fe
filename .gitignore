@@ -1,0 +1,22 @@
+# Set
+node_modules
+*.log
+*.gz
+mock.json
+
+
+# OS X
+.DS_Store*
+.idea
+Icon?
+._*
+.vscode
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
