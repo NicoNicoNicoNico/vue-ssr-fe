@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="app">
     {{text}}
     <button @click="changeText"></button>
     <router-link to="hello">Hello router</router-link>
@@ -8,8 +8,7 @@
 <script lang="ts">
   export default {
     // asyncData ({ store, route }) {
-    // 触发 action 后，会返回 Promise
-      // return store.dispatch('fetchItem', route.params.id)
+    //   return store.dispatch('fetchItem', route.params.id)
     // },
     data() {
       return {
@@ -27,10 +26,12 @@
       }
     },
     mounted() {
+      const _this = this as any;
+      console.log("store",_this.$store.state.storeText);
       // window.location.href = 'http://codesky.me';
     }
   };
 </script>
 <style>
-#app { color: red }
+.app { color: red }
 </style>

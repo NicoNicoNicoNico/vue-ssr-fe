@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
-      items: {}
+      items: {},
+      storeText: 'storeText'
     },
     actions: {
       // fetchItem ({ commit }, id) {

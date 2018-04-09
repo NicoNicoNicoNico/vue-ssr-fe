@@ -4,18 +4,24 @@ import Router from 'vue-router'
 import HelloComponent from "./components/hello.vue";
 import app from "./app.vue";
 
+Vue.use(Router)
+
 export function createRouter () {
+
+  var RouterView = {
+    template: '<router-view></router-view>'
+  };
+
   return new Router({
-    mode: 'history',
     routes: [{
       path: '/',
-      children: [{
-        path: 'index',
-        component: app,
-      },{
-        path: 'hello',
-        component: HelloComponent,
-      }]
+      component:RouterView
+    },{
+      path: '/index',
+      component: app
+    },{
+      path: '/hello',
+      component: HelloComponent
     }]
   })
 }
