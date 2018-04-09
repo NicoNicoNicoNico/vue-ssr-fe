@@ -7,9 +7,9 @@
 </template>
 <script lang="ts">
   export default {
-    // asyncData ({ store, route }) {
-    //   return store.dispatch('fetchItem', route.params.id)
-    // },
+    asyncData ({ store, route }: any) {
+      return store.dispatch('fetchItem', route.params.id)
+    },
     data() {
       return {
         text: 'hello world'
@@ -27,10 +27,13 @@
     },
     mounted() {
       const _this = this as any;
-      console.log("store",_this.$store.state.storeText);
+      // var dd = document.createElement('span');
+      // dd.innerText = _this.$store.state.id;
+      // document.documentElement.appendChild(dd);
+      // console.log("store", _this.$store.state.storeText);
       // window.location.href = 'http://codesky.me';
     }
-  };
+  } as any;
 </script>
 <style>
 .app { color: red }

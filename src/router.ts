@@ -13,6 +13,7 @@ export function createRouter () {
   };
 
   return new Router({
+    mode: 'history',
     routes: [{
       path: '/',
       component:RouterView

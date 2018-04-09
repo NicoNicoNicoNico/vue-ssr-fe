@@ -7,6 +7,7 @@
     "dev": "webpack-dev-server --open --config webpack.client.config.js",
     "bc": "webpack --config webpack.client.config.js",
     "bs": "webpack --config webpack.server.config.js",
+    "server": "node ./server/render.js",
     "all": "npm run bc && npm run bs"
   },
   "author": "",
@@ -20,7 +21,7 @@
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^3.2.0",
     "jsdom": "^10.1.0",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.8.3",
     "sass-loader": "^6.0.3",
     "scss-loader": "0.0.1",
     "style-loader": "^0.17.0",

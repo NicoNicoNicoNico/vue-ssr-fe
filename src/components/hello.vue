@@ -9,6 +9,9 @@
 <script lang="ts">
 
 export default {
+    asyncData ({ store, route }: any) {
+      return store.dispatch('fetchItem', route.params.id)
+    },
     data() {
         return {
             name: 'world',
