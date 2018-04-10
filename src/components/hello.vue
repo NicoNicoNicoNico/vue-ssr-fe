@@ -9,8 +9,9 @@
 <script lang="ts">
 
 export default {
-    asyncData ({ store, route }: any) {
-      return store.dispatch('fetchItem', route.params.id)
+    asyncData ({ store, route, date }: any) {
+      var name = 'hello';
+      return store.commit('setItem', {name , date})
     },
     data() {
         return {
@@ -32,7 +33,14 @@ export default {
              var _this = this as any;
             return Array(_this.enthusiasm + 1).join('!');
         }
-    }
+		},
+		mounted() {
+      const _this = this as any;
+      var dd = document.createElement('span');
+      dd.innerText = _this.$store.state.items.hello;
+      document.documentElement.appendChild(dd);
+			console.log("store", _this.$store.state.items);
+		}
 };
 </script>
 

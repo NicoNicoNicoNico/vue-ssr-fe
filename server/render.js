@@ -35,7 +35,8 @@ function render (req, res) {
   }
 
   const context = {
-    url: req.url
+    url: req.url,
+    date: Date.now()
   }
 
   // In production: create server renderer using template and built server bundle.

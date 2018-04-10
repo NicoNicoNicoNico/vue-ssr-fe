@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const htmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/entry-client.js',
@@ -44,6 +45,11 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: "manifest",
       minChunks: Infinity
+    }),
+    new CleanWebpackPlugin('dist/client-bundle.*', {
+      root: __dirname,
+      verbose: true,
+      dry: false
     }),
     // This plugins generates `vue-ssr-client-manifest.json` in the
     // output directory.

@@ -9022,6 +9022,7 @@ function createRouter() {
         template: '<router-view></router-view>'
     };
     return new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+        mode: 'history',
         routes: [{
                 path: '/',
                 component: RouterView
@@ -11688,7 +11689,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/jiangshan/Desktop/work/vue-ssr-fe/src/components/hello.vue"
+Component.options.__file = "/Users/eo-rd/Desktop/demo/vue-ssr-fe/src/components/hello.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] hello.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11791,6 +11792,11 @@ module.exports = function listToStyles (parentId, list) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
+    asyncData: function (_a) {
+        var store = _a.store, route = _a.route, date = _a.date;
+        var name = 'hello';
+        return store.commit('setItem', { name: name, date: date });
+    },
     data: function () {
         return {
             name: 'world',
@@ -11811,6 +11817,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
             return Array(_this.enthusiasm + 1).join('!');
         }
+    },
+    mounted: function () {
+        var _this = this;
+        var dd = document.createElement('span');
+        dd.innerText = _this.$store.state.items.hello;
+        document.documentElement.appendChild(dd);
+        console.log("store", _this.$store.state.items);
     }
 });
 
@@ -11861,7 +11874,7 @@ var Component = __webpack_require__(5)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/jiangshan/Desktop/work/vue-ssr-fe/src/app.vue"
+Component.options.__file = "/Users/eo-rd/Desktop/demo/vue-ssr-fe/src/app.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11931,9 +11944,10 @@ exports.push([module.i, "\n.app { color: red\n}\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
-    asyncData: function (options) {
-        var store = options.store, route = options.route;
-        return store.dispatch('fetchItem', route.params.id);
+    asyncData: function (_a) {
+        var store = _a.store, route = _a.route, date = _a.date;
+        var name = 'index';
+        return store.commit('setItem', { name: name, date: date });
     },
     data: function () {
         return {
@@ -11941,7 +11955,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     // created() {
-    // localStorage.setItem('test', 'hello');
+    // localStorage.setItem('test', 'hello')n;
     // window.location.href = 'http://codesky.me';
     // },
     methods: {
@@ -11952,7 +11966,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function () {
         var _this = this;
-        console.log("store", _this.$store.state.storeText);
+        var dd = document.createElement('span');
+        dd.innerText = _this.$store.state.items.index;
+        document.documentElement.appendChild(dd);
+        console.log("store", _this.$store.state.items);
         // window.location.href = 'http://codesky.me';
     }
 });
@@ -11996,27 +12013,18 @@ if (false) {
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 // 假定我们有一个可以返回 Promise 的
 // 通用 API（请忽略此 API 具体实现细节）
-var fetchItem = function (id) { return new Promise(function (resolve) { return resolve(2); }); };
 function createStore() {
     return new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         state: {
             items: {},
+            id: 0,
             storeText: 'storeText'
         },
-        actions: {
-            fetchItem: function (_a, id) {
-                var commit = _a.commit;
-                // `store.dispatch()` 会返回 Promise，
-                // 以便我们能够知道数据在何时更新
-                return fetchItem(id).then(function (item) {
-                    commit('setItem', { id: id, item: item });
-                });
-            }
-        },
+        actions: {},
         mutations: {
             setItem: function (state, _a) {
-                var id = _a.id, item = _a.item;
-                __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].set(state.items, id, item);
+                var name = _a.name, date = _a.date;
+                __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].set(state.items, name, date);
             }
         }
     });

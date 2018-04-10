@@ -7,18 +7,15 @@
 </template>
 <script lang="ts">
   export default {
-    asyncData ({ store, route }: any) {
-      return store.dispatch('fetchItem', route.params.id)
+    asyncData ({ store, route, date }: any) {
+      var name = 'index';
+      return store.commit('setItem', {name , date})
     },
     data() {
       return {
         text: 'hello world'
       };
     },
-    // created() {
-      // localStorage.setItem('test', 'hello');
-      // window.location.href = 'http://codesky.me';
-    // },
     methods: {
       changeText() {
         const _this = this as any;
@@ -27,11 +24,9 @@
     },
     mounted() {
       const _this = this as any;
-      // var dd = document.createElement('span');
-      // dd.innerText = _this.$store.state.id;
-      // document.documentElement.appendChild(dd);
-      // console.log("store", _this.$store.state.storeText);
-      // window.location.href = 'http://codesky.me';
+      var dd = document.createElement('span');
+      dd.innerText = _this.$store.state.items.index;
+      document.documentElement.appendChild(dd);
     }
   } as any;
 </script>
