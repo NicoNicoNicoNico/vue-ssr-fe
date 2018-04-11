@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import App from './app.vue'
-import Hello from './components/hello.vue'
 import { createRouter } from './router'
 import { createStore } from './store/store'
 import { sync } from 'vuex-router-sync'

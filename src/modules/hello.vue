@@ -41,7 +41,7 @@ export default {
       document.documentElement.appendChild(dd);
 			console.log("store", _this.$store.state.items);
 		}
-};
+} as any;
 </script>
 
 <style>

@@ -3,6 +3,7 @@
     {{text}}
     <button @click="changeText"></button>
     <router-link to="hello">Hello router</router-link>
+    <div><span>helloText</span>{{helloText}}</div>
   </div>
 </template>
 <script lang="ts">
@@ -22,12 +23,19 @@
         _this.text = 'test click'
       }
     },
-    mounted() {
-      const _this = this as any;
-      var dd = document.createElement('span');
-      dd.innerText = _this.$store.state.items.index;
-      document.documentElement.appendChild(dd);
+    computed: {
+      helloText() {
+        const _this = this as any;
+        console.log("helloText", _this.$store.state.items.index);
+        return _this.$store.state.items.index;
+      }
     }
+    // mounted() {
+    //   const _this = this as any;
+    //   var dd = document.createElement('span');
+    //   dd.innerText = _this.$store.state.items.index;
+    //   document.documentElement.appendChild(dd);
+    // }
   } as any;
 </script>
 <style>
