@@ -3,8 +3,6 @@ const webpack = require('webpack');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ASSET_PATH = process.env.ASSET_PATH || '/';
 module.exports = {
   entry: './src/entry-client.js',
   output: {
@@ -29,36 +27,21 @@ module.exports = {
           appendTsSuffixTo: [/\.vue$/],
         }
       },
-      { test: /\.(sass|scss)$/, loader: ExtractTextPlugin.extract({ fallback: "vue-style-loader", use: 'css-loader!sass-loader' }) },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback: "vue-style-loader", use: 'css-loader' }) },
-      { test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            scss: ExtractTextPlugin.extract({
-              use: 'css-loader!sass-loader',
-              fallback: 'vue-style-loader'
-            })
-          }
-        } 
-      },
-      { test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/, 
-        exclude: /favicon\.png$/, 
-        loader: 'url-loader',
-        query: {
-          limit: 20000,
-          name: 'assets/[name]-[hash:5].[ext]'
-        }
-      }
+      { test: /\.scss$/, use: ['vue-style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+      { test: /\.vue$/, use: ['vue-loader'] },
+      { test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/, exclude: /favicon\.png$/, use: ['url-loader'] }
     ]
   },
+  devServer: {
+    contentBase: "/",//本地服务器所加载的页面所在的目录
+    // historyApiFallback: true,//不跳转
+    historyApiFallback: {
+      disableDotRule: true
+    },
+    inline: true//实时刷新
+  },
   plugins: [
-    new ExtractTextPlugin("style-[hash:5].css"),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
     new htmlWebpackPlugin({
       template: path.join(__dirname, './webpack.tmpl.html'),
     }),

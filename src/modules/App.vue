@@ -8,34 +8,24 @@
 </template>
 <script lang="ts">
   export default {
-    asyncData ({ store, route, date }: any) {
-      var name = 'index';
-      return store.commit('setItem', {name , date})
+    asyncData ({ store, route, data }: any) {
+      return store.commit('setPage', data);
     },
     data() {
       return {
         text: 'hello world'
-      };
+      }; 
     },
     methods: {
-      changeText() {
-        const _this = this as any;
-        _this.text = 'test click'
+      changeText(this: any) {
+        this.text = 'test click'
       }
     },
     computed: {
-      helloText() {
-        const _this = this as any;
-        console.log("helloText", _this.$store.state.items.index);
-        return _this.$store.state.items.index;
+      helloText(this: any) {
+        return this.$store.state.ssrData.helloText;
       }
     }
-    // mounted() {
-    //   const _this = this as any;
-    //   var dd = document.createElement('span');
-    //   dd.innerText = _this.$store.state.items.index;
-    //   document.documentElement.appendChild(dd);
-    // }
   } as any;
 </script>
 <style>

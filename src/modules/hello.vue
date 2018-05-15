@@ -1,45 +1,37 @@
 <template>
-    <div>
-        <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
-        <button @click="decrement">-</button>
-        <button @click="increment">+</button>
-    </div>
+  <div>
+    <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
+    <button @click="decrement">-</button>
+    <button @click="increment">+</button>
+  </div>
 </template>
 
 <script lang="ts">
 
 export default {
-    asyncData ({ store, route, date }: any) {
-      var name = 'hello';
-      return store.commit('setItem', {name , date})
+    asyncData ({ store, route, data }: any) {
+      return store.commit('setPage', data);
     },
     data() {
-        return {
-            name: 'world',
-            enthusiasm: 5,
-        }
+      return {
+        name: 'world',
+        enthusiasm: 5,
+      }
     },
     methods: {
-        increment() { var _this = this as any; _this.enthusiasm++; },
-        decrement() {
-             var _this = this as any;
-            if (_this.enthusiasm > 1) {
-                _this.enthusiasm--;
-            }
-        },
+      increment(this: any) { 
+        this.enthusiasm++; 
+      },
+      decrement(this: any) {
+        if (this.enthusiasm > 1) {
+          this.enthusiasm--;
+        }
+      },
     },
     computed: {
-        exclamationMarks() {
-             var _this = this as any;
-            return Array(_this.enthusiasm + 1).join('!');
-        }
-		},
-		mounted() {
-      const _this = this as any;
-      var dd = document.createElement('span');
-      dd.innerText = _this.$store.state.items.hello;
-      document.documentElement.appendChild(dd);
-			console.log("store", _this.$store.state.items);
+      exclamationMarks(this: any) {
+        return Array(this.enthusiasm + 1).join('!');
+      }
 		}
 } as any;
 </script>

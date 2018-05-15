@@ -35,9 +35,3 @@ router.onReady(() => {
   })
   app.$mount('#app')
 })
-
-// import createApp  from './index.ts'
-// const { app, router, store} = createApp()
-// router.onReady(() => {
-//   app.$mount('#app')
-// })

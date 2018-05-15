@@ -1,4 +1,5 @@
 # Set
+dist
 node_modules
 *.log
 *.gz

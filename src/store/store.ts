@@ -7,16 +7,14 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
-      items: {},
-      id: 0,
-      storeText: 'storeText'
+      ssrData: {},
     },
     actions: {
 
     },
     mutations: {
-      setItem(state, {name, date}) {
-        Vue.set(state.items, name, date);
+      setPage(state, data) {
+        state.ssrData = data;
       }
     }
   })

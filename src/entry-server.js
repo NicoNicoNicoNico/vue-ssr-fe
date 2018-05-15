@@ -19,7 +19,7 @@ export default context => {
           return Component.asyncData({
             store,
             route: router.currentRoute,
-            date: context.date
+            data: context.data
           })
         }
       })).then(() => {

@@ -14,7 +14,6 @@ const { createBundleRenderer } = require('vue-server-renderer');
 // global.localStorage = window.localStorage;
 // global.document = window.document;
 
-
 function createRenderer (bundle, options) {
   return createBundleRenderer(bundle, options);
 }
@@ -36,7 +35,9 @@ function render (req, res) {
 
   const context = {
     url: req.url,
-    date: Date.now()
+    data: {
+      helloText: 'hello world'
+    }
   }
 
   // In production: create server renderer using template and built server bundle.
@@ -60,7 +61,6 @@ function render (req, res) {
     }
     console.log('---------------')
     
-    // console.log(html)
     res.send(html);
     // if (!isProd) {
     //   console.log(`whole request: ${Date.now() - s}ms`)
@@ -69,17 +69,6 @@ function render (req, res) {
 }
 
 app.get('*', render);
-
-// app.get('/', (req, res) => {
-  
-//   renderer.renderToString({ url: '/' }, (error, html) => {
-//     console.log(html)
-//     if (error) throw error.stack;
-//     res.send(html);
-//     // require('fs').writeFileSync('./dist/index.html', html);
-//   });
-
-// })
 
 app.listen(8388, e => {
   console.log('server start on port 8388')

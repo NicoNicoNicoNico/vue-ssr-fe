@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --open --config webpack.client.config.js",
+    "dev": "webpack-dev-server --open --config webpack.dev.config.js",
     "bc": "webpack --config webpack.client.config.js",
     "bs": "webpack --config webpack.server.config.js",
     "server": "node ./server/render.js",

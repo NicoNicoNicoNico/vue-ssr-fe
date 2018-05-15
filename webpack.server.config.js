@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
 
 module.exports = {
@@ -25,13 +26,31 @@ module.exports = {
           appendTsSuffixTo: [/\.vue$/],
         }
       },
-      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'scss-loader'] },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-      { test: /\.vue$/, use: ['vue-loader'] },
-      { test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/, exclude: /favicon\.png$/, use: ['url-loader'] }
+      { test: /\.(sass|scss)$/, loader: ExtractTextPlugin.extract({ fallback: "vue-style-loader", use: 'css-loader!sass-loader' }) },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallback: "vue-style-loader", use: 'css-loader' }) },
+      { test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            scss: ExtractTextPlugin.extract({
+              use: 'css-loader!sass-loader',
+              fallback: 'vue-style-loader'
+            })
+          }
+        } 
+      },
+      { test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/, 
+        exclude: /favicon\.png$/, 
+        loader: 'url-loader',
+        query: {
+          limit: 20000,
+          name: 'assets/[name]-[hash:5].[ext]'
+        }
+      }
     ]
   },
   plugins: [
+    new ExtractTextPlugin("style-[hash:5].css"),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
